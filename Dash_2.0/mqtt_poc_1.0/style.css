@@ -1,0 +1,76 @@
+html {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    height: 150px;
+    line-height: 150px;
+    margin: 0;
+    margin-bottom: 50px;
+    box-shadow: 0px 1px 10px #ddd;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.device {
+    width: 200px;
+    height: 250px;
+
+    border-radius: 4px;
+    box-shadow: 1px 1px 10px #ddd;
+}
+
+.device .name {
+    font-size: 34px;
+    padding: 15px 0px 15px 0px;
+}
+
+.device .value {
+    font-size: 75px;
+    margin-top: 25px;
+}
+
+#btn-div {
+    height: 50px;
+    margin-top: 35px;
+}
+
+#test-btn {
+    background-color: #ddd;
+    border: none;
+    color: #333;
+    padding: 15px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+#test-btn:hover {
+    cursor: pointer;
+}
+
+#messages {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    padding: 12px;
+    width:100%;
+    display: inline-block;
+    border:1px solid black;
+    max-height: 250px;
+    min-height: 250px;
+    overflow: scroll;
+}
+#messages span {
+    overflow-y: scroll;
+    overflow: scroll;
+}
