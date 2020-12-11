@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,500;1,700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="toggles.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.min.js" type="text/javascript"></script>
+
+    </head>
+    <body>
+        <h1 id="page-header">Development page</h1>
+
+        <div class="container">
+    
+            <div id="toggle_light_disp" class="device simple-toggle">
+                <div class="name">/toggle_light</div>
+                <div class="value"></div>
+                <label class="switch">
+                    <input class="toggle" type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+    
+            <div id="temp_sensor_disp" class="device">
+                <div class="name">/temp_sensor</div>
+                <div class="value temp">77</div>
+            </div>
+
+            <div id="humid_sensor_disp" class="device">
+                <div class="name">/temp_sensor</div>
+                <div class="value humid">77</div>
+            </div>
+
+            <div id="dual_dht_disp" class="device">
+                <div class="name">/temp_sensor</div>
+                <div class="values">
+                    <div class="value temp">77</div>
+                    <div class="value humid">77</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="messages"></div>
+        
+        <script
+            src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            crossorigin="anonymous">
+        </script>
+        
+        <script src="observables.js" async defer></script>
+        <script src="observers.js" async defer></script>
+        <script src="script.js" async defer></script>
+    </body>
+</html>

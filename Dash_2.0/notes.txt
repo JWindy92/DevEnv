@@ -1,0 +1,13 @@
+Tasmota Ips
+10.0.0.54 - test switch
+10.0.0.186 - desk
+10.0.0.153 - table
+
+Topic to send command to
+/cmnd/test_toggle/POWER
+
+Gets the current state of the switch
+/tele/test_toggle/STATE
+
+Publishes when a command is recieved
+/stat/test_toggle/RESULT

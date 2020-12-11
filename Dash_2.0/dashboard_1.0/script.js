@@ -6,40 +6,29 @@ $(document).ready(function () {
 topics = ['/rgb_light', '/toggle_light', '/temp_sensor', '/test']
 devices = []
 
+function init_devices() {
 
-let rgb_light = new Device('rgb_light')
-let toggle_light = new Device('toggle_light')
-let dht_11 = new DHT_11('temp_sensor')
+    let toggle_light = new Sonoff_Basic('toggle_light')
+    let dht_11 = new DHT_11('temp_sensor')
 
-let rgb_light_disp = new DisplayElement("#rgb_light_disp");
-let toggle_light_disp = new DisplayElement("#toggle_light_disp");
-let dht_11_disp = new DHT_11_Display("#temp_sensor_disp", "temperature")
+    let toggle_light_disp = new Sonoff_Basic_Display("#toggle_light_disp", toggle_light);
+    let dht_11_temp_disp = new DHT_11_Display("#temp_sensor_disp", dht_11)
+    let dht_11_humid_disp = new DHT_11_Display("#humid_sensor_disp", dht_11)
+    let dht_11_dual_disp = new DHT_11_Display("#dual_dht_disp", dht_11)
 
-rgb_light.subscribe(rgb_light_disp)
-toggle_light.subscribe(toggle_light_disp)
-dht_11.subscribe(dht_11_disp)
+}
 
 // ######## DEVICE SIMS ######## //
 setInterval(function() {
     json = {
         "temp": parseInt(Math.random() * 100),
-        "hum": 77
+        "hum": parseInt(Math.random() * 100)
     }
     
     message = new Paho.MQTT.Message(JSON.stringify(json))
     message.destinationName = "/temp_sensor"
     client.send(message)
 }, 4000)
-
-$("#toggle_check").click(() => {
-    if($("#toggle_check").prop("checked")) {
-        message = new Paho.MQTT.Message("ON")
-    } else {
-        message = new Paho.MQTT.Message("OFF")
-    }
-    message.destinationName = "/cmnd/toggle_light/POWER"
-    client.send(message)
-})
 
 // ########  MQTT LOGIC STARTS HERE #######
 
@@ -83,9 +72,11 @@ function onConnect() {
 		console.log('Subscribing to: ', topic)
 		document.getElementById("messages").innerHTML += '<span>Subscribing to: ' + topic + '</span><br/>';
 		client.subscribe(topic)
-	})
-	updateScroll();
-
+    })
+    console.log("On Connect Done")
+    updateScroll();
+    init_devices()
+    
 }
 
 // Called when the client loses its connection
@@ -104,8 +95,8 @@ function onMessageArrived(message) {
 
 	devices.forEach(function(device) {
 		
-		if (device.MQTT_topic == message.destinationName) {
-			device.notify(message.payloadString)
+		if (device.MQTT_topics.includes(message.destinationName)) {
+			device.notify(message.payloadString, message.destinationName)
 		}
 	})
 }

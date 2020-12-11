@@ -42,6 +42,10 @@ class Device extends Observable {
 	
 }
 
+class Sonoff_Basic extends Device {
+	
+}
+
 class DHT_11 extends Device {
 
 	constructor(id) {
